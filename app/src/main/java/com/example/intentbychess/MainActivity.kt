@@ -14,18 +14,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Инициализация View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Позвонить: открывает набор номера (ACTION_DIAL) [cite: 548]
         binding.btnCall.setOnClickListener {
             val phone = getString(R.string.contact_phone)
             val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phone"))
             safeStartActivity(intent)
         }
 
-        // 2. Написать email: открывает почтовое приложение (ACTION_SENDTO) [cite: 557]
         binding.btnEmail.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:") // Только почтовые приложения [cite: 562]
@@ -35,7 +32,6 @@ class MainActivity : AppCompatActivity() {
             safeStartActivity(intent)
         }
 
-        // 3. Показать офис на карте: координаты с меткой [cite: 586]
         binding.btnMap.setOnClickListener {
             val label = getString(R.string.map_label)
             val geoUri = Uri.parse("geo:0,0?q=60.0237,30.2289($label)")
@@ -43,7 +39,6 @@ class MainActivity : AppCompatActivity() {
             safeStartActivity(intent)
         }
 
-        // 4. Поделиться контактом: через диалог выбора (createChooser) [cite: 582]
         binding.btnShare.setOnClickListener {
             val sendIntent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
