@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
-            // Если приложения нет, показываем Toast [cite: 391]
             Toast.makeText(this, getString(R.string.error_no_app), Toast.LENGTH_SHORT).show()
         }
     }
